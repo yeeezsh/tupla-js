@@ -12,6 +12,9 @@ const io = require('socket.io')(server)
 
 const Client = require('./socket.utility')
 const Clients = new Client()
+const Grid = require('./grid.utility')
+const Grids = new Grid()
+
 io.on('connection', socket => {
     const clientId = socket.id
     console.log('connection', clientId)
@@ -26,6 +29,14 @@ io.on('connection', socket => {
             }
         }
         Clients.addClient(parse)
+        const parsedGrid = {
+            id: clientId,
+            screenOption: {
+                width: d.pixel.width,
+                height: d.pixel.height
+            }
+        }
+        Grids.addGrid(parsedGrid)
     })
 
     socket.on('disconnect', () => {
@@ -37,7 +48,5 @@ io.on('connection', socket => {
 })
 
 setInterval(() => {
-    // const list = io.
-    // console.log(list)
-    Clients.showClient()
+    Grids.showGrid()
 }, 2000)
