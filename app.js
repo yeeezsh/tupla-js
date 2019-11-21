@@ -42,6 +42,7 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         if (clientId) {
             Clients.removeClient(clientId)
+            Grids.removeGrid(clientId)
         }
         console.log('user disconnected')
     })
