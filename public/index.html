@@ -18,6 +18,10 @@
     }
   </style>
   <body>
+    <div
+      id="dpi"
+      style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"
+    ></div>
     <div id="render"></div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
@@ -25,9 +29,16 @@
     const URL = "http://localhost:8080";
     const socket = io(URL);
     const render = document.getElementById("render");
+    const dpi_x = document.getElementById("dpi").offsetWidth;
+    const dpi_y = document.getElementById("dpi").offsetHeight;
+    var wInch = screen.width / dpi_x;
+    var hInch = screen.height / dpi_y;
     const screenOption = {
-      height: render.offsetHeight,
-      width: render.offsetWidth
+      pixel: { height: render.offsetHeight, width: render.offsetWidth },
+      size: {
+        width: wInch,
+        height: hInch
+      }
     };
     console.log(screenOption);
 

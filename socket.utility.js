@@ -1,3 +1,5 @@
+const util = require('util')
+
 class Client {
     constructor() {
         this.clients = []
@@ -6,8 +8,14 @@ class Client {
     addClient(client = {
         id: '',
         screenOption: {
-            width: 0,
-            height: 0
+            pixel: {
+                width: 0,
+                height: 0,
+            },
+            size: {
+                width: 0,
+                height: 0
+            }
         }
     }) {
         if (!client.id) throw new Error('must defined id')
@@ -15,14 +23,14 @@ class Client {
     }
 
     removeClient(id = '') {
-        const found = this.clients.findIndex(e => e.id === id)
-        if (found === -1) throw new Error('cannot find id')
+        // const found = this.clients.findIndex(e => e.id === id)
+        // if (found === -1) throw new Error('cannot find id')
         const filtered = this.clients.filter(e => e.id !== id)
         this.clients = filtered
     }
 
     showClient() {
-        console.log(this.clients)
+        console.log(util.inspect(this.clients, { showHidden: false, depth: null }))
     }
 }
 
