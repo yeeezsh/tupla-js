@@ -26,7 +26,8 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   <script>
-    const URL = "http://localhost:8080";
+    // const URL = "http://localhost:8080";
+    const URL = "http://192.168.1.101:8080";
     const socket = io(URL);
     const render = document.getElementById("render");
     const dpi_x = document.getElementById("dpi").offsetWidth;
@@ -38,10 +39,11 @@
       pixel: { height: render.offsetHeight, width: render.offsetWidth },
       size: {
         width: wInch,
-        height: hInch
+        height: hInch,
+        dpi: dpi_x
       }
     };
-    console.log(screenOption, 'dpi', {x: dpi_x, y: dpi_y});
+    console.log(screenOption, 'dpi', {x: dpi_x, y: dpi_y}, screen);
 
     socket.emit("screen", screenOption);
   </script>

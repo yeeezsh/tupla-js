@@ -14,7 +14,8 @@ class Client {
             },
             size: {
                 width: 0,
-                height: 0
+                height: 0,
+                dpi: 0
             }
         }
     }) {
