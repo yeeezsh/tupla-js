@@ -20,4 +20,10 @@ class Client {
         const filtered = this.clients.filter(e => e.id !== id)
         this.clients = filtered
     }
+
+    showClient() {
+        console.log(this.clients)
+    }
 }
+
+module.exports = Client
