@@ -1,4 +1,4 @@
-class Render {
+class Grid {
 
     constructor() {
         this.rowGrid = 0
@@ -55,7 +55,7 @@ class Render {
 
 }
 
-const test = new Render()
+const test = new Grid()
 test.addGrid({ id: 1, screen: { width: 10, height: 20 } })
 test.addGrid({ id: 2, screen: { width: 13, height: 20 } })
 test.addGrid({ id: 3, screen: { width: 10, height: 420 } })
@@ -68,4 +68,4 @@ test.addGrid({ id: 7, screen: { width: 10, height: 420 } })
 // test.arrage()
 test.showGrid()
 
-module.exports = Render
+module.exports = Grid
