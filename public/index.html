@@ -7,20 +7,30 @@
     <title>Document</title>
   </head>
   <style>
-      html, body {
-          height: 100%;
-          width: 100%;
-      }
-      #render {
-          height: 100%;
-          width: 100%;
-      }
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    #render {
+      height: 100%;
+      width: 100%;
+    }
   </style>
   <body>
     <div id="render"></div>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   <script>
-      const render = document.getElementById('render')
-      console.log(render.offsetHeight, render.offsetWidth)
+    const URL = "http://localhost:8080";
+    const socket = io(URL);
+    const render = document.getElementById("render");
+    const screenOption = {
+      height: render.offsetHeight,
+      width: render.offsetWidth
+    };
+    console.log(screenOption);
+
+    socket.emit("screen", screenOption);
   </script>
 </html>
