@@ -5,7 +5,6 @@ class Render {
         this.maxRowGrid = 0
         this.colGrid = 0
         this.maxColGrid = 0
-        this.nextGrid = 'col'
         this.grid = []
         this.list = []
         this.maxWidth = 0
@@ -14,6 +13,14 @@ class Render {
 
     addGrid(setting = { id: '', screen: { width: 0, height: 0 } }) {
         this.list.push(setting)
+        const { maxWidth, maxHeight } = this.list.reduce((acc, { screen }) => {
+            return {
+                maxHeight: acc.maxHeight + screen.height,
+                maxWidth: acc.maxWidth + screen.width
+            }
+        }, { maxHeight: 0, maxWidth: 0 })
+        this.maxHeight = maxHeight
+        this.maxWidth = maxWidth
         this.arrage()
     }
 
