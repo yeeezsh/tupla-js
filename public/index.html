@@ -31,8 +31,9 @@
     const render = document.getElementById("render");
     const dpi_x = document.getElementById("dpi").offsetWidth;
     const dpi_y = document.getElementById("dpi").offsetHeight;
-    var wInch = screen.width / dpi_x;
-    var hInch = screen.height / dpi_y;
+    const wInch = window.innerWidth / dpi_x;
+    const hInch = window.innerHeight / dpi_y;
+    // window.screen.availHeight
     const screenOption = {
       pixel: { height: render.offsetHeight, width: render.offsetWidth },
       size: {
@@ -40,7 +41,7 @@
         height: hInch
       }
     };
-    console.log(screenOption);
+    console.log(screenOption, 'dpi', {x: dpi_x, y: dpi_y});
 
     socket.emit("screen", screenOption);
   </script>
