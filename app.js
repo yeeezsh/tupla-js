@@ -19,7 +19,6 @@ const Render = require('./render.random')
 const Renderer = new Render()
 const Clients = new Client()
 Renderer.addObject()
-Renderer.addObject()
 
 io.on('connection', socket => {
 
@@ -59,19 +58,30 @@ io.on('connection', socket => {
 
 
 
-    // draw section
-    setInterval(() => {
-        Renderer.update()
+    // // draw section
+    // setInterval(() => {
+    //     Renderer.update()
 
-        // console.log('diemension', )
-        // console.log(Renderer.showList())
-        const draw = Renderer.lists
-        // const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
-        const broadcast = Grids.pixel.draw(draw)
-        // const draw = Renderer.lists
-        Clients.broadcast(broadcast, socket)
-    }, 2000)
+    //     // console.log('diemension', )
+    //     // console.log(Renderer.showList())
+    //     const draw = Renderer.lists
+    //     // const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
+    //     // console.log('draw', draw, socket.id)
+    //     const broadcast = Grids.pixel.draw(draw)
+    //     // const draw = Renderer.lists
+    //     console.log('broadcast', broadcast)
+    //     Clients.broadcast(broadcast, socket)
+    // }, 2000)
 })
+setInterval(() => {
+    // io.sockets
+    Renderer.update()
+    const draw = Renderer.lists
+    const broadcast = Grids.pixel.draw(draw)
+    Clients.broadcast(broadcast, io)
+}, 1000)
+
+
 
 // setInterval(() => {
 //     io.on('connection', socket => {
