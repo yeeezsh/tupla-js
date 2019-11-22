@@ -25,7 +25,7 @@ class Client {
 
     removeClient(id = '') {
         const found = this.clients.findIndex(e => e.id === id)
-        if (found === -1) throw new Error('cannot find id')
+        // if (found === -1) throw new Error('cannot find id')
         const filtered = this.clients.filter(e => e.id !== id)
         this.clients = filtered
     }
