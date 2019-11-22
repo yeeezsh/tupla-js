@@ -90,7 +90,7 @@ class Pixel {
     ], maxWidth = 0, maxHeight = 0) {
         this.width = maxWidth
         this.height = maxHeight
-        console.log('pixel parse', data)
+        // console.log('pixel parse', data)
         const parsed = data.map(e => {
             const sub = e.map(({ id, screenOption }) => {
                 return {
@@ -146,26 +146,20 @@ class Pixel {
     draw(drawUnit = [
         { x: 0, y: 0 }
     ]) {
-        // const drawUnit = [{ x: 1000, y: 120 }, { x: 9, y: 20 }]
-        const draws = drawUnit.map(e => {
+        drawUnit.forEach(e => {
             const [col, row] = this.findScreen(e.x, e.y)
-            if (row === -1 || col === -1) return
-            const screen = this.pixelMap[row][col]
-            console.log(e, 'col/row', col, row, screen)
+            if (col === -1 || row === -1) return
 
-            return {
-                x: e.x - screen.pixel.xstart,
-                y: e.y + screen.pixel.ystart
-            }
+            console.log('draw', col, row)
+            const screen = this.pixelMap[col][row]
+            console.log('screen', screen)
         })
-        console.log('draws', draws)
-
-        // console.log(this.findScreen(1200, 800))
+        console.log('drawww')
     }
 
     findScreen(x = 0, y = 0, color = []) {
 
-        for (const [i, col] of this.pixelMap.entries()) {
+        for (const [i, row] of this.pixelMap.entries()) {
             function rowComparator(e) {
                 if (x < e.pixel.xstart || x > e.pixel.xstop) {
                     return false
@@ -175,10 +169,10 @@ class Pixel {
                 }
                 return true
             }
-            const row = col.findIndex(rowComparator)
-            if (row !== -1) {
-                console.log('drawn on', i, row)
-                return [i, row]
+            const col = row.findIndex(rowComparator)
+            if (col !== -1) {
+                console.log('drawn on', i, col)
+                return [i, col]
             }
         }
         console.log('not found')
