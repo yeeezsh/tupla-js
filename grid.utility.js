@@ -111,7 +111,46 @@ class Pixel {
             })
             return sub
         })
-        console.log('pixel parsed', JSON.stringify(parsed))
+
+        // console.log('pixel parsed', parsed)
+        console.log('pixel parsed', JSON.stringify(parsed, null, 2))
+        // const mappingPixel = parsed
+        // for(let col = 0; i < )
+        // let h = 0
+        // let minH
+        const mappedPixel = parsed.map((e, i, arr) => {
+
+            let h = 0
+            let w = 0
+
+            // const minH = Math.min(...e.map(c => c.size.height))
+            const col = e.map((c, j) => {
+                if (i === 0) {
+                    h = 0
+                } else {
+                    h = arr[i][j].size.height
+                }
+                // minH.push(c.size.height)
+                const cMap = {
+                    ...c,
+                    pixel: {
+                        ...c.pixel,
+                        xstart: w,
+                        xstop: w + c.size.width,
+                        ystart: h,
+                        ystop: h + c.size.height
+                    }
+                }
+                w += c.size.width
+                // h += min
+                return cMap
+            })
+            return col
+        })
+
+        // console.log('mapped pixel', JSON.stringify(mappedPixel, null, 1))
+        console.log('mapped pixel', mappedPixel)
+
         // const pixelMapped = parsed.map(row => {
         //     const col
         // })
