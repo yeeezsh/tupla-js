@@ -2,15 +2,6 @@ function ranIntRange(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
 class Render {
     constructor(w = 0, h = 0) {
         this.maxWidth = w
@@ -27,7 +18,12 @@ class Render {
         const object = {
             x: ranIntRange(0, this.maxWidth),
             y: ranIntRange(0, this.maxHeight),
-            color: getRandomColor()
+            color: {
+                r: ranIntRange(0, 255),
+                g: ranIntRange(0, 255),
+                b: ranIntRange(0, 255),
+                a: 255
+            }
         }
         this.lists.push(object)
     }
