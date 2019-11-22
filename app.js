@@ -13,8 +13,10 @@ let io = require('socket.io')(server)
 const Client = require('./socket.utility')
 const Grid = require('./grid.utility')
 const Render = require('./render.random')
+const ImagesRender = require('./render.images')
 
 const Renderer = new Render()
+const ImagesRenderer = new ImagesRender()
 const Clients = new Client()
 const Grids = new Grid()
 
@@ -57,11 +59,25 @@ io.on('connection', socket => {
     })
 })
 
-setInterval(() => {
+// draw
+setInterval(async () => {
+    // random particles
     Renderer.update()
     const draw = Renderer.lists
     const broadcast = Grids.pixel.draw(draw)
     Clients.broadcast(broadcast, io)
-}, 250)
+
+}, 1000)
+
+async function broadcastImage() {
+    // images
+    // const draw = await ImagesRenderer.readImage('./img.jpg')
+    const draw = await ImagesRenderer.readImage('./large.png')
+    const broadcast = Grids.pixel.draw(draw)
+    Clients.broadcast(broadcast, io)
+}
+
+// setTimeout(() => broadcastImage(), 3000)
+
 
 
