@@ -34,10 +34,13 @@ class Render {
     update() {
         const newFrame = this.lists.map(e => {
             // console.log()
+            // const dx= 
             return {
                 ...e,
-                x: 0,
-                y: 0
+                // x: 0,
+                // y: 0
+                x: ranIntRange(0, this.maxWidth),
+                y: ranIntRange(0, this.maxHeight),
             }
         })
         this.lists = newFrame
@@ -55,6 +58,8 @@ const test = new Render(100, 100)
 test.addObject()
 test.addObject()
 test.addObject()
+test.showList()
+test.update()
 test.showList()
 
 
