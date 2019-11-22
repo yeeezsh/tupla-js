@@ -19,6 +19,8 @@ io.on('connection', socket => {
     const clientId = socket.id
     console.log('connection', clientId)
 
+    socket.emit('connection')
+
 
     socket.on('screen', d => {
         console.log('screen', socket.id, d)
@@ -49,5 +51,5 @@ io.on('connection', socket => {
 })
 
 setInterval(() => {
-    Grids.showGrid()
+    // Grids.showGrid()
 }, 2000)

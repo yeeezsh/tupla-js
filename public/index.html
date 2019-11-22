@@ -43,8 +43,11 @@
         dpi: dpi_x
       }
     };
-    console.log(screenOption, 'dpi', {x: dpi_x, y: dpi_y}, screen);
+    console.log(screenOption, "dpi", { x: dpi_x, y: dpi_y }, screen);
 
-    socket.emit("screen", screenOption);
+    socket.on("connection", () => {
+      console.log("connected to server");
+      socket.emit("screen", screenOption);
+    });
   </script>
 </html>
