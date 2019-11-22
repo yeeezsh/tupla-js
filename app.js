@@ -11,13 +11,13 @@ server.listen(8080, () => console.log('server running at 8080'))
 let io = require('socket.io')(server)
 
 const Client = require('./socket.utility')
-// const Clients = new Client()
 const Grid = require('./grid.utility')
-const Grids = new Grid()
 const Render = require('./render.random')
 
 const Renderer = new Render()
 const Clients = new Client()
+const Grids = new Grid()
+
 Renderer.addObject()
 
 io.on('connection', socket => {
@@ -55,71 +55,13 @@ io.on('connection', socket => {
         }
         console.log('user disconnected')
     })
-
-
-
-    // // draw section
-    // setInterval(() => {
-    //     Renderer.update()
-
-    //     // console.log('diemension', )
-    //     // console.log(Renderer.showList())
-    //     const draw = Renderer.lists
-    //     // const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
-    //     // console.log('draw', draw, socket.id)
-    //     const broadcast = Grids.pixel.draw(draw)
-    //     // const draw = Renderer.lists
-    //     console.log('broadcast', broadcast)
-    //     Clients.broadcast(broadcast, socket)
-    // }, 2000)
 })
+
 setInterval(() => {
-    // io.sockets
     Renderer.update()
     const draw = Renderer.lists
     const broadcast = Grids.pixel.draw(draw)
     Clients.broadcast(broadcast, io)
 }, 250)
-
-
-
-// setInterval(() => {
-//     io.on('connection', socket => {
-//         socket.emit('connection', { id: 'eueo' })
-//     })
-// }, 2000);
-
-
-
-
-// setInterval(() => {
-//     //     // Grids.showGrid()
-//     //     // Grids.pixel.findScreen(100, 100)
-//     //     // Grids.pixel.findScreen(600, 600)
-//     //     // Grids.pixel.findScreen(1200, 600)
-//     //     // Grids.pixel.findScreen(0, 0)
-//     //     // Grids.pixel.findScreen(900, 900)
-//     //     // Grids.pixel.draw([{ x: 1000, y: 120 }, { x: 9, y: 20 }, { x: 1000, y: 900 }])
-//     //     // console.log('pixelMap', Grids.pixel.pixelMap)
-//     //     // Grids.pixel.findScreen(1000, 120)
-//     //     // Grids.pixel.draw([{ x: 1000, y: 900 }])
-//     //     // const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }])
-//     //     // Clients.broadcast(broadcast)
-
-//     console.log('update')
-//     const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }])
-//     Clients.broadcast(broadcast)
-// }, 1000)
-
-// setTimeout(() => {
-//     console.log('update')
-//     const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }])
-//     console.log('hhhh', broadcast)
-//     Clients.broadcast(broadcast)
-// }, 4000);
-// Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }]).then(data => {
-//     console.log('dataaaaaa', data)
-// })
-// Clients.broadcast(broadcast)
 
 
