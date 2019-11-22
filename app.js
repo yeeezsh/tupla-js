@@ -14,9 +14,14 @@ const Client = require('./socket.utility')
 // const Clients = new Client()
 const Grid = require('./grid.utility')
 const Grids = new Grid()
+const Render = require('./render.random')
+
+const Renderer = new Render()
+const Clients = new Client()
+Renderer.addObject()
+Renderer.addObject()
 
 io.on('connection', socket => {
-    const Clients = new Client(socket)
 
     const clientId = socket.id
     console.log('connection', clientId)
@@ -40,6 +45,8 @@ io.on('connection', socket => {
             }
         }
         Grids.addGrid(parsedGrid)
+        const { width, height } = Grids.getDiemention()
+        Renderer.updateDiemension(width, height)
     })
 
     socket.on('disconnect', () => {
@@ -50,11 +57,19 @@ io.on('connection', socket => {
         console.log('user disconnected')
     })
 
+
+
     // draw section
     setInterval(() => {
-        console.log('diemension', Grids.getDiemention())
-        const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
-        Clients.broadcast(broadcast)
+        Renderer.update()
+
+        // console.log('diemension', )
+        // console.log(Renderer.showList())
+        const draw = Renderer.lists
+        // const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
+        const broadcast = Grids.pixel.draw(draw)
+        // const draw = Renderer.lists
+        Clients.broadcast(broadcast, socket)
     }, 2000)
 })
 
