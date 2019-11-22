@@ -12,31 +12,42 @@ function rgbToHex(r, g, b) {
 
 class Render {
     constructor(path = '') {
-        this.lists = []
+        this.output = []
 
-        Jimp.read(path, (err, image) => {
-            const imagesArray = []
-            const { width, height } = image.bitmap
-            for (let w = 0; w <= width; w++) {
-                imagesArray.push([])
-                for (let h = w; h <= height; h++) {
-                    const pixel = image.getPixelColour(w, h)
-                    const { r, g, b } = Jimp.intToRGBA(pixel)
-                    const color = rgbToHex(r, g, b)
-                    imagesArray[w].push({
-                        x: w,
-                        y: h,
-                        color
-                    })
+    }
+
+    async readImage(path) {
+        return new Promise((resolve, reject) => {
+            Jimp.read(path, (err, image) => {
+                if (err) reject(err)
+
+                const imagesArray = []
+                const { width, height } = image.bitmap
+                for (let w = 0; w <= width; w++) {
+                    imagesArray.push([])
+                    for (let h = w; h <= height; h++) {
+                        const pixel = image.getPixelColour(w, h)
+                        imagesArray[w].push({
+                            x: w,
+                            y: h,
+                            color: Jimp.intToRGBA(pixel)
+                        })
+                    }
                 }
-            }
-            return imagesArray
+                const flat = imagesArray.flat()
+                this.output = flat
+                resolve(flat)
+            })
         })
+    }
+
+    getDraw() {
+        return this.output
     }
 
 
 }
 
-const test = new Render('./img.jpg')
-
+// const test = new Render('./img.jpg')
+// console.log(test.output)
 module.exports = Render
