@@ -19,15 +19,20 @@ class Grid {
             const filtered = this.list.filter(e => e.id !== setting.id)
             this.list = filtered
         }
-        const { maxWidth, maxHeight } = this.list.reduce((acc, { screenOption }) => {
-            return {
-                maxHeight: acc.maxHeight + screenOption.height,
-                maxWidth: acc.maxWidth + screenOption.width
-            }
-        }, { maxHeight: 0, maxWidth: 0 })
+
+        this.arrage()
+
+        const maxWidth = this.grid[0] && this.grid[0].reduce((acc, e) => {
+            return acc + e.screenOption.width
+        }, 0)
+        const maxHeight = this.grid && this.grid.reduce((acc, e) => {
+            return acc + e[0].screenOption.height
+        }, 0)
         this.maxHeight = maxHeight
         this.maxWidth = maxWidth
-        this.arrage()
+        console.log('maxWidth', maxWidth)
+        console.log('maxHeight', maxHeight)
+
         this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
     }
 
@@ -45,7 +50,7 @@ class Grid {
             return { col: xFloor, row: yFloor }
         }
         const { col, row } = solveColRow(n)
-        console.log(n, col, row)
+        console.log('n | col | row ', n, col, row)
         this.maxColGrid = col
         this.maxRowGrid = row
 
