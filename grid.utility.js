@@ -131,7 +131,8 @@ class Pixel {
                         xstop: w + c.size.width,
                         ystart: h,
                         ystop: h + c.size.height
-                    }
+                    },
+                    pos: [i, j]
                 }
                 w += c.size.width
                 return cMap

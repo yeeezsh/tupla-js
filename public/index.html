@@ -57,8 +57,8 @@
       socket.on("test", msg => console.log("test received", msg));
 
       if (clientId) {
-        socket.on(clientId, ({ draw }) => {
-          console.log("received canvas", draw);
+        socket.on(clientId, ({ draw, pos }) => {
+          console.log("received canvas", draw, pos);
           canvas = draw;
         });
       }

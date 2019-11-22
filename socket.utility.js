@@ -53,7 +53,7 @@ class Client {
         }, [])
 
         parsed.forEach(e => {
-            this.socket.emit(e.id, { draw: e.canvas })
+            this.socket.emit(e.id, { draw: e.canvas, pos: e.pos })
         })
 
         return
