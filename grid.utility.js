@@ -9,6 +9,7 @@ class Grid {
         this.list = []
         this.maxWidth = 0
         this.maxHeight = 0
+        this.pixel = new Pixel()
     }
 
     addGrid(setting = { id: '', screenOption: { width: 0, height: 0 } }, remove = false) {
@@ -27,6 +28,7 @@ class Grid {
         this.maxHeight = maxHeight
         this.maxWidth = maxWidth
         this.arrage()
+        this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
     }
 
     removeGrid(id = '') {
@@ -63,6 +65,75 @@ class Grid {
         console.log(this.grid)
     }
 
+}
+
+class Pixel {
+    constructor() {
+        this.pixelMap = []
+        this.width = 0
+        this.height = 0
+    }
+
+    map(data = [
+        [{
+            id: '', screenOption: {
+                width: 0,
+                height: 0
+            }
+        }]
+    ], maxWidth = 0, maxHeight = 0) {
+        this.width = maxWidth
+        this.height = maxHeight
+        console.log('pixel parse', data)
+        const parsed = data.map(e => {
+            const sub = e.map(({ id, screenOption }) => {
+                return {
+                    id,
+                    pixel: {
+                        xstart: 0,
+                        xstop: 0,
+                        ystart: 0,
+                        ystop: 0
+                    },
+                    canvas: [
+                        { x: 0, y: 0 }
+                    ],
+                    size: {
+                        width: screenOption.width,
+                        height: screenOption.height
+                    }
+                }
+            })
+            return sub
+        })
+        console.log('pixel parsed', JSON.stringify(parsed))
+        // const pixelMapped = parsed.map(row => {
+        //     const col
+        // })
+        // const parsed = data.map(e => {
+        //     return {
+        //         id: e.id,
+        //         virtualSize: {
+        //             width: 0,
+        //             height: 0
+        //         },
+        //         actualSize: {
+        //             width: e.screenOption.width,
+        //             height: e.screenOption.height
+        //         }
+        //     }
+        // })
+        // this.pixelMap = parsed
+        // const mapping = this.pixelMap
+
+        // console.log(this.pixelMap, this.width, this.height)
+        // for (let i = 0; i <= mapping.length - 1; i++) {
+        //     console.log(mapping, i, this.pixelMap[i])
+        //     for (let j = 0; i <= this.pixelMap[i].length - 1; j++) {
+        //         console.log('pixel map', this.pixelMap[i][j])
+        //     }
+        // }
+    }
 }
 
 // const test = new Grid()
