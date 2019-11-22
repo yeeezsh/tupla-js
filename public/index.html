@@ -22,12 +22,13 @@
       id="dpi"
       style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"
     ></div>
+    <!-- <canvas id='renderCanvas' width="window.innerHeight"></canvas> -->
     <div id="render"></div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   <script>
-    // const URL = "http://localhost:8080";
-    const URL = "http://192.168.1.101:8080";
+    const URL = "http://localhost:8080";
+    // const URL = "http://192.168.1.101:8080";
     const socket = io(URL);
     const render = document.getElementById("render");
     const dpi_x = document.getElementById("dpi").offsetWidth;
