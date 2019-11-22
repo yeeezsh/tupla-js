@@ -59,6 +59,6 @@ setInterval(() => {
     // Grids.pixel.draw([{ x: 1000, y: 120 }, { x: 9, y: 20 }, { x: 1000, y: 900 }])
     console.log('pixelMap', Grids.pixel.pixelMap)
     // Grids.pixel.findScreen(1000, 120)
-    Grids.pixel.draw([{ x: 900, y: 600 }])
+    Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }])
     // Grids.pixel.draw([{ x: 1000, y: 900 }])
 }, 1000)

@@ -152,9 +152,15 @@ class Pixel {
 
             console.log('draw', col, row)
             const screen = this.pixelMap[col][row]
-            console.log('screen', screen)
+            const pixel = screen.pixel
+            const saveCanvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
+            // console.log('save draw', saveDraw)
+            this.pixelMap[col][row].canvas = saveCanvas
+            // console.log('screen', screen, saveDraw)
         })
-        console.log('drawww')
+
+        console.log('drawww', this.pixelMap)
+        return
     }
 
     findScreen(x = 0, y = 0, color = []) {
