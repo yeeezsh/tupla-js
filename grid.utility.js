@@ -151,6 +151,23 @@ class Pixel {
     draw(drawUnit = [
         { x: 0, y: 0, color: '' }
     ]) {
+        // reset
+        // this.pixelMap.
+        console.log('hhhh', this.pixelMap)
+        const reset = this.pixelMap.map(e => {
+            const col = e.map(c => {
+                return {
+                    ...c,
+                    canvas: []
+                }
+            })
+            console.log('mapp col', col)
+            return col
+        })
+        this.pixelMap = reset
+
+
+        // draw
         drawUnit.forEach(e => {
             const [col, row] = this.findScreen(e.x, e.y)
             if (col === -1 || row === -1) return
@@ -162,11 +179,15 @@ class Pixel {
                 return drawCanvas.x === e.x && drawCanvas.y === e.y
             })
 
-            if (duplicated !== -1) {
-                this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
-            } else {
-                this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
-            }
+            this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+
+            // TEST
+            // if (duplicated !== -1) {
+            //     this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+            // } else {
+            //     this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+            // }
+
         })
         // console.log('drawww', this.pixelMap)
         return this.pixelMap
