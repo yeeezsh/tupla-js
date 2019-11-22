@@ -48,6 +48,7 @@ io.on('connection', socket => {
         Grids.addGrid(parsedGrid)
         const { width, height } = Grids.getDiemention()
         Renderer.updateDiemension(width, height)
+        broadcastImage()
     })
 
     socket.on('disconnect', () => {
@@ -60,24 +61,26 @@ io.on('connection', socket => {
 })
 
 // draw
-setInterval(async () => {
-    // random particles
-    Renderer.update()
-    const draw = Renderer.lists
-    const broadcast = Grids.pixel.draw(draw)
-    Clients.broadcast(broadcast, io)
+// setInterval(async () => {
+//     // random particles
+//     Renderer.update()
+//     const draw = Renderer.lists
+//     const broadcast = Grids.pixel.draw(draw)
+//     Clients.broadcast(broadcast, io)
 
-}, 1000)
-
+// }, 1000)
+let draw
+ImagesRenderer.readImage('./img.jpg').then(d => {
+    draw = d
+})
 async function broadcastImage() {
     // images
-    const draw = await ImagesRenderer.readImage('./img.jpg')
     // const draw = await ImagesRenderer.readImage('./large.png')
     const broadcast = Grids.pixel.draw(draw)
     Clients.broadcast(broadcast, io)
 }
 
-// setTimeout(() => broadcastImage(), 6000)
+// setTimeout(() => broadcastImage(), 2000)
 
 
 
