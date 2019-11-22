@@ -18,6 +18,11 @@ class Render {
         this.lists = []
     }
 
+    updateDiemension(w = 0, h = 0) {
+        this.maxHeight = h
+        this.maxWidth = w
+    }
+
     addObject() {
         const object = {
             x: ranIntRange(0, this.maxWidth),
