@@ -170,6 +170,7 @@ class Pixel {
         // draw
         drawUnit.forEach(e => {
             const [col, row] = this.findScreen(e.x, e.y)
+            // const [row, col] = this.findScreen(e.x, e.y)
             if (col === -1 || row === -1) return
 
             const screen = this.pixelMap[col][row]
@@ -184,6 +185,10 @@ class Pixel {
 
             // for image
             // this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+
+            // this.pixelMap[col][row].canvas.push({ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color })
+            // this.pixelMap[col][row].canvas.push({ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color })
+            
             this.pixelMap[col][row].canvas.push({ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color })
 
             // TEST
