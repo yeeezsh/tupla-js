@@ -101,7 +101,7 @@ class Pixel {
                         ystop: 0
                     },
                     canvas: [
-                        { x: 0, y: 0 }
+                        { x: 0, y: 0, color: [0, 0, 0] }
                     ],
                     size: {
                         width: screenOption.width,
@@ -113,7 +113,6 @@ class Pixel {
         })
 
         const mappedPixel = parsed.map((e, i, arr) => {
-
             let h = 0
             let w = 0
 
@@ -139,7 +138,36 @@ class Pixel {
             return col
         })
 
-        console.log('mapped pixel', mappedPixel)
+        this.pixelMap = mappedPixel
+        // console.log('mapped pixel', this.pixelMap)
+        this.canvas()
+
+    }
+
+    canvas() {
+        const draw = [{ x: 100, y: 120 }, { x: 9, y: 20 }]
+        this.findScreen(900, 900)
+    }
+
+    findScreen(x = 0, y = 0, color = []) {
+
+        for (const [i, col] of this.pixelMap.entries()) {
+            function rowComparator(e) {
+                if (x < e.pixel.xstart || x > e.pixel.xstop) {
+                    return false
+                }
+                if (y < e.pixel.ystart || y > e.pixel.ystop) {
+                    return false
+                }
+                return true
+            }
+            const row = col.findIndex(rowComparator)
+            if (row !== -1) {
+                console.log('drawn on', i, row)
+                return [i, row]
+            }
+        }
+
 
     }
 }
