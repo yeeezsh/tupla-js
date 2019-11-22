@@ -71,13 +71,13 @@ setInterval(async () => {
 
 async function broadcastImage() {
     // images
-    // const draw = await ImagesRenderer.readImage('./img.jpg')
-    const draw = await ImagesRenderer.readImage('./large.png')
+    const draw = await ImagesRenderer.readImage('./img.jpg')
+    // const draw = await ImagesRenderer.readImage('./large.png')
     const broadcast = Grids.pixel.draw(draw)
     Clients.broadcast(broadcast, io)
 }
 
-// setTimeout(() => broadcastImage(), 3000)
+// setTimeout(() => broadcastImage(), 6000)
 
 
 
