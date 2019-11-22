@@ -87,7 +87,7 @@ class Pixel {
                 height: 0
             }
         }]
-    ], maxWidth = 0, maxHeight = 0, cb) {
+    ], maxWidth = 0, maxHeight = 0) {
         this.width = maxWidth
         this.height = maxHeight
         console.log('pixel parse', data)
@@ -141,12 +141,26 @@ class Pixel {
 
         this.pixelMap = mappedPixel
         return
-        // return cb()
     }
 
-    canvas() {
-        const draw = [{ x: 100, y: 120 }, { x: 9, y: 20 }]
-        // console.log(this.findScreen(900, 900))
+    draw(drawUnit = [
+        { x: 0, y: 0 }
+    ]) {
+        // const drawUnit = [{ x: 1000, y: 120 }, { x: 9, y: 20 }]
+        const draws = drawUnit.map(e => {
+            const [col, row] = this.findScreen(e.x, e.y)
+            if (row === -1 || col === -1) return
+            const screen = this.pixelMap[row][col]
+            console.log(e, 'col/row', col, row, screen)
+
+            return {
+                x: e.x - screen.pixel.xstart,
+                y: e.y + screen.pixel.ystart
+            }
+        })
+        console.log('draws', draws)
+
+        // console.log(this.findScreen(1200, 800))
     }
 
     findScreen(x = 0, y = 0, color = []) {
@@ -168,7 +182,7 @@ class Pixel {
             }
         }
         console.log('not found')
-        return false
+        return [-1, -1]
     }
 }
 

@@ -21,7 +21,6 @@ io.on('connection', socket => {
 
     socket.emit('connection')
 
-
     socket.on('screen', d => {
         console.log('screen', socket.id, d)
         const parse = {
@@ -53,8 +52,10 @@ io.on('connection', socket => {
 setInterval(() => {
     // Grids.showGrid()
     // Grids.pixel.findScreen(100, 100)
-    Grids.pixel.findScreen(600, 600)
-    Grids.pixel.findScreen(1200, 600)
-    Grids.pixel.findScreen(0, 0)
+    // Grids.pixel.findScreen(600, 600)
+    // Grids.pixel.findScreen(1200, 600)
+    // Grids.pixel.findScreen(0, 0)
     // Grids.pixel.findScreen(900, 900)
+    Grids.pixel.draw([{ x: 1000, y: 120 }, { x: 9, y: 20 }, { x: 1000, y: 900 }])
+    // Grids.pixel.draw([{ x: 1000, y: 900 }])
 }, 1000)
