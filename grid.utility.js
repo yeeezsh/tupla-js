@@ -153,7 +153,7 @@ class Pixel {
     ]) {
         // reset
         // this.pixelMap.
-        console.log('hhhh', this.pixelMap)
+        // console.log('hhhh', this.pixelMap)
         const reset = this.pixelMap.map(e => {
             const col = e.map(c => {
                 return {
@@ -161,7 +161,7 @@ class Pixel {
                     canvas: []
                 }
             })
-            console.log('mapp col', col)
+            // console.log('mapp col', col)
             return col
         })
         this.pixelMap = reset
@@ -175,11 +175,16 @@ class Pixel {
             const screen = this.pixelMap[col][row]
             const pixel = screen.pixel
             const drawCanvas = { x: e.x - pixel.xstart, y: e.y - pixel.ystart }
-            const duplicated = screen.canvas.findIndex(e => {
-                return drawCanvas.x === e.x && drawCanvas.y === e.y
-            })
+            // const duplicated = screen.canvas.findIndex(e => {
+            //     return drawCanvas.x === e.x && drawCanvas.y === e.y
+            // })
 
-            this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+            // for random
+            // this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+
+            // for image
+            // this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
+            this.pixelMap[col][row].canvas.push({ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color })
 
             // TEST
             // if (duplicated !== -1) {
@@ -206,11 +211,11 @@ class Pixel {
             }
             const col = row.findIndex(rowComparator)
             if (col !== -1) {
-                console.log('drawn on', i, col)
+                // console.log('drawn on', i, col)
                 return [i, col]
             }
         }
-        console.log('not found')
+        // console.log('not found')
         return [-1, -1]
     }
 }
