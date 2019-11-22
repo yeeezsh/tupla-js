@@ -52,4 +52,9 @@ io.on('connection', socket => {
 
 setInterval(() => {
     // Grids.showGrid()
-}, 2000)
+    // Grids.pixel.findScreen(100, 100)
+    Grids.pixel.findScreen(600, 600)
+    Grids.pixel.findScreen(1200, 600)
+    Grids.pixel.findScreen(0, 0)
+    // Grids.pixel.findScreen(900, 900)
+}, 1000)

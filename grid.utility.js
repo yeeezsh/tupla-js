@@ -33,6 +33,7 @@ class Grid {
         console.log('maxWidth', maxWidth)
         console.log('maxHeight', maxHeight)
 
+        // const test = this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
         this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
     }
 
@@ -86,7 +87,7 @@ class Pixel {
                 height: 0
             }
         }]
-    ], maxWidth = 0, maxHeight = 0) {
+    ], maxWidth = 0, maxHeight = 0, cb) {
         this.width = maxWidth
         this.height = maxHeight
         console.log('pixel parse', data)
@@ -139,14 +140,13 @@ class Pixel {
         })
 
         this.pixelMap = mappedPixel
-        // console.log('mapped pixel', this.pixelMap)
-        this.canvas()
-
+        return
+        // return cb()
     }
 
     canvas() {
         const draw = [{ x: 100, y: 120 }, { x: 9, y: 20 }]
-        this.findScreen(900, 900)
+        // console.log(this.findScreen(900, 900))
     }
 
     findScreen(x = 0, y = 0, color = []) {
@@ -167,8 +167,8 @@ class Pixel {
                 return [i, row]
             }
         }
-
-
+        console.log('not found')
+        return false
     }
 }
 
