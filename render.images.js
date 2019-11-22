@@ -25,7 +25,7 @@ class Render {
                 const { width, height } = image.bitmap
                 for (let w = 0; w <= width; w++) {
                     imagesArray.push([])
-                    for (let h = w; h <= height; h++) {
+                    for (let h = 0; h <= height; h++) {
                         const pixel = image.getPixelColour(w, h)
                         imagesArray[w].push({
                             x: w,
