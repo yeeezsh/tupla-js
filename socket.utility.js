@@ -1,9 +1,8 @@
 const util = require('util')
 
 class Client {
-    constructor(socket) {
+    constructor() {
         this.clients = []
-        this.socket = socket
     }
 
     addClient(client = {
@@ -40,20 +39,13 @@ class Client {
             id: '',
             canvas: [{ x: 0, y: 0, color: [] }]
         }
-    ]) {
-
-        // canvas.forEach(e => {
-        //     console.log('emitting', e.id)
-        //     // socket.emit(e.id, 'test')
-        //     // socket.emit('test', 'hello')
-        //     // socket.emit(e.id, { draw: e.canvas })
-        // })
+    ], socket) {
         const parsed = canvas.reduce((acc, e) => {
             return [...acc, ...e]
         }, [])
 
         parsed.forEach(e => {
-            this.socket.emit(e.id, { draw: e.canvas, pos: e.pos })
+            socket.emit(e.id, { draw: e.canvas, pos: e.pos })
         })
 
         return
