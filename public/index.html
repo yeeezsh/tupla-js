@@ -61,11 +61,11 @@
     };
     console.log(screenOption, "dpi", { x: dpi_x, y: dpi_y }, screen);
 
+    socket.emit("screen", screenOption);
     socket.on("connection", msg => {
       console.log("connected to server");
       console.log("receive id", msg.id);
       clientId = msg.id;
-      socket.emit("screen", screenOption);
 
       socket.on(clientId, ({ draw, pos }) => {
         overlay.innerText = pos;
