@@ -19,7 +19,7 @@
   "homepage": "https://github.com/yee2542/tupla-js#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "get-pixels": "^3.3.2",
+    "jimp": "^0.8.5",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
