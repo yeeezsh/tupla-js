@@ -112,25 +112,17 @@ class Pixel {
             return sub
         })
 
-        // console.log('pixel parsed', parsed)
-        console.log('pixel parsed', JSON.stringify(parsed, null, 2))
-        // const mappingPixel = parsed
-        // for(let col = 0; i < )
-        // let h = 0
-        // let minH
         const mappedPixel = parsed.map((e, i, arr) => {
 
             let h = 0
             let w = 0
 
-            // const minH = Math.min(...e.map(c => c.size.height))
             const col = e.map((c, j) => {
                 if (i === 0) {
                     h = 0
                 } else {
                     h = arr[i][j].size.height
                 }
-                // minH.push(c.size.height)
                 const cMap = {
                     ...c,
                     pixel: {
@@ -142,41 +134,13 @@ class Pixel {
                     }
                 }
                 w += c.size.width
-                // h += min
                 return cMap
             })
             return col
         })
 
-        // console.log('mapped pixel', JSON.stringify(mappedPixel, null, 1))
         console.log('mapped pixel', mappedPixel)
 
-        // const pixelMapped = parsed.map(row => {
-        //     const col
-        // })
-        // const parsed = data.map(e => {
-        //     return {
-        //         id: e.id,
-        //         virtualSize: {
-        //             width: 0,
-        //             height: 0
-        //         },
-        //         actualSize: {
-        //             width: e.screenOption.width,
-        //             height: e.screenOption.height
-        //         }
-        //     }
-        // })
-        // this.pixelMap = parsed
-        // const mapping = this.pixelMap
-
-        // console.log(this.pixelMap, this.width, this.height)
-        // for (let i = 0; i <= mapping.length - 1; i++) {
-        //     console.log(mapping, i, this.pixelMap[i])
-        //     for (let j = 0; i <= this.pixelMap[i].length - 1; j++) {
-        //         console.log('pixel map', this.pixelMap[i][j])
-        //     }
-        // }
     }
 }
 
