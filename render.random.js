@@ -59,13 +59,13 @@ class Render {
 
 }
 
-const test = new Render(100, 100)
-test.addObject()
-test.addObject()
-test.addObject()
-test.showList()
-test.update()
-test.showList()
+// const test = new Render(100, 100)
+// test.addObject()
+// test.addObject()
+// test.addObject()
+// test.showList()
+// test.update()
+// test.showList()
 
 
 module.exports = Render
