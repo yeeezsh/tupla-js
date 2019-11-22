@@ -27,6 +27,7 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   <script>
+    let clientId = "";
     const URL = "http://localhost:8080";
     // const URL = "http://192.168.1.101:8080";
     const socket = io(URL);
@@ -35,6 +36,7 @@
     const dpi_y = document.getElementById("dpi").offsetHeight;
     const wInch = window.innerWidth / dpi_x;
     const hInch = window.innerHeight / dpi_y;
+    let canvas;
     // window.screen.availHeight
     const screenOption = {
       pixel: { height: render.offsetHeight, width: render.offsetWidth },
@@ -46,9 +48,20 @@
     };
     console.log(screenOption, "dpi", { x: dpi_x, y: dpi_y }, screen);
 
-    socket.on("connection", () => {
+    socket.on("connection", msg => {
       console.log("connected to server");
+      console.log("receive id", msg.id);
+      clientId = msg.id;
       socket.emit("screen", screenOption);
+
+      socket.on("test", msg => console.log("test received", msg));
+
+      if (clientId) {
+        socket.on(clientId, ({ draw }) => {
+          console.log("received canvas", draw);
+          canvas = draw;
+        });
+      }
     });
   </script>
 </html>
