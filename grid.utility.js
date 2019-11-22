@@ -71,6 +71,10 @@ class Grid {
         console.log(this.grid)
     }
 
+    getDiemention() {
+        return { width: this.maxWidth, height: this.maxHeight }
+    }
+
 }
 
 class Pixel {

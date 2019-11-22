@@ -50,7 +50,9 @@ io.on('connection', socket => {
         console.log('user disconnected')
     })
 
+    // draw section
     setInterval(() => {
+        console.log('diemension', Grids.getDiemention())
         const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
         Clients.broadcast(broadcast)
     }, 2000)
