@@ -16,8 +16,13 @@
       height: 100%;
       width: 100%;
     }
+    #overlay {
+      position: absolute;
+      z-index: 1;
+    }
   </style>
   <body>
+    <div id="overlay"></div>
     <div
       id="dpi"
       style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"
@@ -41,6 +46,8 @@
     let canvas;
     const canvasDoc = document.getElementById("canvas");
     const ctx = canvasDoc.getContext("2d");
+    const overlay = document.getElementById("overlay");
+
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
@@ -61,7 +68,9 @@
       socket.emit("screen", screenOption);
 
       socket.on(clientId, ({ draw, pos }) => {
-        console.log("received canvas", draw, pos);
+        overlay.innerText = pos;
+        console.log("pos", pos);
+        console.log("received canvas", draw);
 
         // const sample = draw[0];
         ctx.clearRect(0, 0, 9999999, 999999);
