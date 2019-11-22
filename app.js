@@ -30,6 +30,7 @@ io.on('connection', socket => {
     socket.emit('connection', { id: clientId })
 
     socket.on('screen', d => {
+        console.log('rearrnage !!!!!')
         console.log('screen', socket.id, d)
         const parse = {
             id: clientId,
@@ -52,10 +53,9 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        if (clientId) {
-            Clients.removeClient(clientId)
-            Grids.removeGrid(clientId)
-        }
+        Clients.removeClient(clientId)
+        Grids.removeGrid(clientId)
+        broadcastImage()
         console.log('user disconnected')
     })
 })
@@ -70,7 +70,7 @@ io.on('connection', socket => {
 
 // }, 1000)
 let draw
-ImagesRenderer.readImage('./img.jpg').then(d => {
+ImagesRenderer.readImage('./img.png').then(d => {
     draw = d
 })
 async function broadcastImage() {
