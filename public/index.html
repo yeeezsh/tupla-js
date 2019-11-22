@@ -72,13 +72,21 @@
         console.log("pos", pos);
         console.log("received canvas", draw);
 
-        // const sample = draw[0];
         ctx.clearRect(0, 0, 9999999, 999999);
+        // const sample = draw[0];
         draw.forEach(e => {
-          console.log(e);
-          ctx.beginPath();
-          ctx.arc(e.x, e.y, 10, 0, Math.PI * 2);
-          ctx.fill();
+          const { r, g, b, a } = e.color;
+
+          //   images
+          ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + a / 255 + ")";
+          //   ctx.fillRect(e.x, e.y, 1, 1);
+
+          // particles
+          ctx.fillRect(e.x, e.y, 10, 10);
+
+          //   ctx.beginPath();
+          //   ctx.arc(e.x, e.y, 1, 0, Math.PI * 2);
+          //   ctx.fill(e.color);
           //   ctx.fillRect(e.x, e.y, 5, 5);
           //   ctx.fillStyle = "#FF0000";
           //   ctx.fillRect(e.x, e.y, 40, 40);
