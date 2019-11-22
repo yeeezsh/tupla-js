@@ -79,7 +79,7 @@ setInterval(() => {
     const draw = Renderer.lists
     const broadcast = Grids.pixel.draw(draw)
     Clients.broadcast(broadcast, io)
-}, 1000)
+}, 250)
 
 
 
