@@ -153,15 +153,24 @@ class Pixel {
             console.log('draw', col, row)
             const screen = this.pixelMap[col][row]
             const pixel = screen.pixel
-            const saveCanvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
-            this.pixelMap[col][row].canvas = saveCanvas
+            const drawCanvas = { x: e.x - pixel.xstart, y: e.y - pixel.ystart }
+            const duplicated = screen.canvas.findIndex(e => {
+                console.log('dupdup', e, drawCanvas)
+                return drawCanvas.x === e.x && drawCanvas.y === e.y
+            })
+
+            console.log('duplicated', duplicated)
+            if (duplicated !== -1) {
+                this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
+            } else {
+                this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
+            }
         })
         console.log('drawww', this.pixelMap)
         return this.pixelMap
     }
 
     findScreen(x = 0, y = 0, color = []) {
-
         for (const [i, row] of this.pixelMap.entries()) {
             function rowComparator(e) {
                 if (x < e.pixel.xstart || x > e.pixel.xstop) {

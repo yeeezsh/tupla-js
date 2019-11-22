@@ -51,7 +51,7 @@ io.on('connection', socket => {
     })
 
     setInterval(() => {
-        const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }])
+        const broadcast = Grids.pixel.draw([{ x: 900, y: 600 }, { x: 0, y: 100 }, { x: 4, y: 100 }, { x: 4, y: 120 }])
         Clients.broadcast(broadcast)
     }, 2000)
 })
