@@ -64,8 +64,9 @@
         console.log("received canvas", draw, pos);
 
         // const sample = draw[0];
-        ctx.clearRect(0, 0, screenOption.size.width, screenOption.size.height);
+        ctx.clearRect(0, 0, 9999999, 999999);
         draw.forEach(e => {
+          console.log(e);
           ctx.beginPath();
           ctx.arc(e.x, e.y, 10, 0, Math.PI * 2);
           ctx.fill();
