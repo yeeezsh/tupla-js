@@ -106,7 +106,7 @@ class Pixel {
                         ystop: 0
                     },
                     canvas: [
-                        { x: 0, y: 0, color: [0, 0, 0] }
+                        // { x: 0, y: 0, color: '' }
                     ],
                     size: {
                         width: screenOption.width,
@@ -149,7 +149,7 @@ class Pixel {
     }
 
     draw(drawUnit = [
-        { x: 0, y: 0 }
+        { x: 0, y: 0, color: '' }
     ]) {
         drawUnit.forEach(e => {
             const [col, row] = this.findScreen(e.x, e.y)
@@ -163,16 +163,16 @@ class Pixel {
             })
 
             if (duplicated !== -1) {
-                this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
+                this.pixelMap[col][row].canvas = [{ x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
             } else {
-                this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart }]
+                this.pixelMap[col][row].canvas = [...screen.canvas, { x: e.x - pixel.xstart, y: e.y - pixel.ystart, color: e.color }]
             }
         })
         // console.log('drawww', this.pixelMap)
         return this.pixelMap
     }
 
-    findScreen(x = 0, y = 0, color = []) {
+    findScreen(x = 0, y = 0) {
         for (const [i, row] of this.pixelMap.entries()) {
             function rowComparator(e) {
                 if (x < e.pixel.xstart || x > e.pixel.xstop) {
