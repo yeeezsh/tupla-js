@@ -48,12 +48,7 @@ class Client {
             socket.emit(e.id, { draw: e.canvas, pos: e.pos })
         })
 
-        return
-
-        // canvas.forEach(e => {
-        //     console.log('emit', e.id)
-        //     this.io.emit(e.id, e.canvas)
-        // })
+        return 
     }
 
 }
