@@ -47,7 +47,7 @@ class Render {
 
     resize(w = 0, h = 0) {
         const image = this.origin
-        // this.render = image.resize(w, h, Jimp.RESIZE_NEAREST_NEIGHBOR)
+        if(!w || ! h) return
         this.render = image.resize(w, h, Jimp.RESIZE_BEZIER)
         this.draw()
         return this.render
