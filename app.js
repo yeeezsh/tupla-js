@@ -76,11 +76,7 @@ io.on('connection', socket => {
 
 // }, 1000)
 let draw
-// ImagesRenderer.readImage(path.join(process.cwd(), 'img.png')).then(d => {
-// ImagesRenderer.readFile(path.join(process.cwd(), 'img2.jpg')).then(() => {
-//     // draw = d
-//     // draw = ImagesRender.draw()
-// })
+
 
 ImagesRenderer.readFile('./img.jpg').then(() => {
     draw = ImagesRenderer.draw()
