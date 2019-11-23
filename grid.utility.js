@@ -23,6 +23,7 @@ class Grid {
         this.arrage()
 
         const maxWidth = this.grid[0] && this.grid[0].reduce((acc, e) => {
+            console.log(e.screenOption.width)
             return acc + e.screenOption.width
         }, 0)
         const maxHeight = this.grid && this.grid.reduce((acc, e) => {
@@ -35,6 +36,7 @@ class Grid {
 
         // const test = this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
         this.pixel.map(this.grid, this.maxWidth, this.maxHeight)
+        return
     }
 
     removeGrid(id = '') {
