@@ -49,13 +49,19 @@ io.on('connection', socket => {
         }
         Grids.addGrid(parsedGrid)
         const { width, height } = Grids.getDiemention()
+        console.log('new die', width, height)
         Renderer.updateDiemension(width, height)
+        // ImagesRenderer.resize(width, height)
+        draw = ImagesRenderer.resize(width, height)
         broadcastImage()
     })
 
     socket.on('disconnect', () => {
         Clients.removeClient(clientId)
         Grids.removeGrid(clientId)
+        const { width, height } = Grids.getDiemention()
+        Renderer.updateDiemension(width, height)
+        draw = ImagesRenderer.resize(width, height)
         broadcastImage()
         console.log('user disconnected')
     })
@@ -71,14 +77,23 @@ io.on('connection', socket => {
 
 // }, 1000)
 let draw
-ImagesRenderer.readImage(path.join(process.cwd(), 'img.png')).then(d => {
-    // ImagesRenderer.readImage(path.join(process.cwd(), 'img2.jpg')).then(d => {
-    draw = d
+// ImagesRenderer.readImage(path.join(process.cwd(), 'img.png')).then(d => {
+// ImagesRenderer.readFile(path.join(process.cwd(), 'img2.jpg')).then(() => {
+//     // draw = d
+//     // draw = ImagesRender.draw()
+// })
+
+ImagesRenderer.readFile('./img.jpg').then(() => {
+    draw = ImagesRenderer.draw()
 })
-async function broadcastImage() {
+
+async function broadcastImage(width, height) {
     // images
     // const draw = await ImagesRenderer.readImage('./large.png')
+    // draw = ImagesRenderer.resize(width, height)
+    // console.log('resize', draw)
     const broadcast = Grids.pixel.draw(draw)
+    console.log(broadcast)
     Clients.broadcast(broadcast, io)
 }
 
