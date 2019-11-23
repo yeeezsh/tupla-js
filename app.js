@@ -49,7 +49,6 @@ io.on('connection', socket => {
         }
         Grids.addGrid(parsedGrid)
         const { width, height } = Grids.getDiemention()
-        console.log('new die', width, height)
         Renderer.updateDiemension(width, height)
         // ImagesRenderer.resize(width, height)
         draw = ImagesRenderer.resize(width, height)
