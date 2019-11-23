@@ -21,7 +21,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "jimp": "^0.8.5",
-    "node-gyp": "^6.0.1",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
