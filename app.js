@@ -70,7 +70,7 @@ io.on('connection', socket => {
 
 // }, 1000)
 let draw
-ImagesRenderer.readImage('./img.png').then(d => {
+ImagesRenderer.readImage(path.join(__dirname, 'img.png')).then(d => {
     draw = d
 })
 async function broadcastImage() {
