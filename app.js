@@ -1,5 +1,5 @@
-// const MODE = 'image'
-const MODE = 'pla'
+const MODE = 'image'
+// const MODE = 'pla'
 
 const path = require('path')
 const http = require('http')
