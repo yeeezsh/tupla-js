@@ -1,3 +1,6 @@
+// const MODE = 'image'
+const MODE = 'pla'
+
 const path = require('path')
 const http = require('http')
 const express = require('express')
@@ -49,33 +52,41 @@ io.on('connection', socket => {
         }
         Grids.addGrid(parsedGrid)
         const { width, height } = Grids.getDiemention()
-        Renderer.updateDiemension(width, height)
-        // ImagesRenderer.resize(width, height)
-        draw = ImagesRenderer.resize(width, height)
-        broadcastImage()
+        if (MODE === 'image') {
+            draw = ImagesRenderer.resize(width, height)
+            broadcastImage()
+        } else {
+            Renderer.updateDiemension(width, height)
+        }
     })
 
     socket.on('disconnect', () => {
         Clients.removeClient(clientId)
         Grids.removeGrid(clientId)
         const { width, height } = Grids.getDiemention()
-        Renderer.updateDiemension(width, height)
-        draw = ImagesRenderer.resize(width, height)
-        broadcastImage()
+        if (MODE === 'image') {
+            draw = ImagesRenderer.resize(width, height)
+            broadcastImage()
+        } else {
+            Renderer.updateDiemension(width, height)
+        }
         console.log('user disconnected')
     })
 })
 
-// draw
-// setInterval(async () => {
-//     // random particles
-//     Renderer.update()
-//     const draw = Renderer.lists
-//     const broadcast = Grids.pixel.draw(draw)
-//     Clients.broadcast(broadcast, io)
-
-// }, 1000)
 let draw
+
+// draw
+if (MODE !== 'image') {
+    setInterval(async () => {
+        // random particles
+        Renderer.update()
+        draw = Renderer.lists
+        const broadcast = Grids.pixel.draw(draw)
+        Clients.broadcast(broadcast, io)
+
+    }, 200)
+}
 
 
 ImagesRenderer.readFile('./img.jpg').then(() => {
