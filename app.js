@@ -1,5 +1,5 @@
-const MODE = 'image'
-// const MODE = 'pla'
+// const MODE = 'image'
+const MODE = 'pla'
 
 const path = require('path')
 const http = require('http')
@@ -24,7 +24,6 @@ const ImagesRenderer = new ImagesRender()
 const Clients = new Client()
 const Grids = new Grid()
 
-Renderer.addObject()
 
 io.on('connection', socket => {
 
@@ -57,6 +56,8 @@ io.on('connection', socket => {
             broadcastImage()
         } else {
             Renderer.updateDiemension(width, height)
+            Renderer.addObject()
+            Renderer.addObject()
         }
     })
 
@@ -69,6 +70,8 @@ io.on('connection', socket => {
             broadcastImage()
         } else {
             Renderer.updateDiemension(width, height)
+            Renderer.removeObject()
+            Renderer.removeObject()
         }
         console.log('user disconnected')
     })
@@ -82,11 +85,13 @@ if (MODE !== 'image') {
         // random particles
         Renderer.update()
         draw = Renderer.lists
+        // console.log('draw p', draw)
         const broadcast = Grids.pixel.draw(draw)
         Clients.broadcast(broadcast, io)
 
-    }, 200)
+    }, 1)
 }
+
 
 
 ImagesRenderer.readFile('./img.jpg').then(() => {
