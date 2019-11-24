@@ -33,13 +33,10 @@ class Render {
     }
 
     removeObject() {
-        console.log('this', this.lists)
         this.lists.pop()
-        console.log('this', this.lists)
     }
 
     update() {
-        console.log(this.lists)
         if (!this.maxHeight || !this.maxWidth) return this.lists
         const newFrame = this.lists.map(e => {
             let dx = e.dx
