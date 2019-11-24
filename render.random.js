@@ -15,9 +15,13 @@ class Render {
     }
 
     addObject() {
+        console.log('add obj')
+        if (!this.maxHeight || !this.maxWidth) return
         const object = {
             x: ranIntRange(0, this.maxWidth),
             y: ranIntRange(0, this.maxHeight),
+            dx: 1,
+            dy: 1,
             color: {
                 r: ranIntRange(0, 255),
                 g: ranIntRange(0, 255),
@@ -29,19 +33,50 @@ class Render {
     }
 
     removeObject() {
+        console.log('this', this.lists)
         this.lists.pop()
+        console.log('this', this.lists)
     }
 
     update() {
+        console.log(this.lists)
+        if (!this.maxHeight || !this.maxWidth) return this.lists
         const newFrame = this.lists.map(e => {
-            // console.log()
-            // const dx= 
+            let dx = e.dx
+            let dy = e.dy
+            if (e.x == this.maxWidth) {
+                dx = -1
+            } else if (e.x === this.maxWidth) {
+                dx = 1
+            } else if (e.x === 0) {
+                dx = 1
+            } else if(e.x > this.maxWidth) {
+                dx = -1
+            }
+
+            if (e.y == this.maxHeight) {
+                dy = -1
+            } else if (e.y === this.maxHeight) {
+                dy = 1
+            } else if (e.y === 0) {
+                dy = 1
+            } else if (e.y > this.maxHeight) {
+                dy = -1
+            }
+            const x = e.x + dx
+            const y = e.y + dy
+
             return {
                 ...e,
-                // x: 0,
-                // y: 0
-                x: ranIntRange(0, this.maxWidth),
-                y: ranIntRange(0, this.maxHeight),
+                // x: ++e.x,
+                // y: ++e.y,
+                x,
+                y,
+                dx,
+                dy
+                // c: e.c || 0
+                // x: ranIntRange(0, this.maxWidth),
+                // y: ranIntRange(0, this.maxHeight),
             }
         })
         this.lists = newFrame
