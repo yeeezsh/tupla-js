@@ -35,8 +35,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
   <script>
     let clientId = "";
-    const URL = "http://localhost:8080";
-    // const URL = "http://192.168.1.101:8080";
+    // const URL = "http://localhost:8080";
+    const URL = "http://192.168.1.101:8080";
+    // const URL = "http://10.35.248.119:8080";
     const socket = io(URL);
     const render = document.getElementById("render");
     const dpi_x = document.getElementById("dpi").offsetWidth;
@@ -82,7 +83,7 @@
           //   ctx.fillRect(e.x, e.y, 1, 1);
 
           // particles
-          ctx.fillRect(e.x, e.y, 100, 100);
+          ctx.fillRect(e.x, e.y, 50, 50);
 
           //   ctx.beginPath();
           //   ctx.arc(e.x, e.y, 1, 0, Math.PI * 2);
